@@ -5,4 +5,5 @@ type Configs = {
   facebook: string;
   tiktok: string;
   youtube: string;
+  email: string;
 };
