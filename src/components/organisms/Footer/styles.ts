@@ -60,6 +60,8 @@ export const LinkWhatsButton = styled.a`
   align-self: flex-start;
   padding: 8px 12px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 
   ${({ theme }) => css`
     background-color: ${theme.COLORS.ORANGE[500]};
