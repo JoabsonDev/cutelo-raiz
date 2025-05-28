@@ -17,6 +17,7 @@ export const Footer = styled.footer`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 16px;
     font-size: clamp(14px, 1.5vw, 16px);
 
@@ -32,7 +33,7 @@ export const Footer = styled.footer`
     }
 
     &:not(.social) {
-      @media (width < ${({ theme }) => theme.BREAKPOINTS.MD}px) {
+      @media (width < ${({ theme }) => theme.BREAKPOINTS.SM}px) {
         flex-direction: column;
         margin-bottom: 16px;
       }

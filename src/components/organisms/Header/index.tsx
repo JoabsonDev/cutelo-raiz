@@ -12,9 +12,10 @@ type HeaderProps = ComponentProps<typeof S.Header>;
 
 export default function Header({ ...rest }: HeaderProps) {
   const queryClient = useQueryClient();
-  const data = queryClient.getQueryData(["home"]);
+  const data = queryClient.getQueryData<AppResponse>(["home"]);
 
   if (!data) return null;
+  const { instagram, facebook, tiktok, youtube, whatsapp } = data.configs;
 
   return (
     <S.Header {...rest}>
@@ -23,36 +24,70 @@ export default function Header({ ...rest }: HeaderProps) {
 
         <nav>
           <ul>
-            <li>
-              <a
-                href="https://www.instagram.com/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Instagram"
-              >
-                <FontAwesome type="brands" icon="instagram" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.facebook.com/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Facebook"
-              >
-                <FontAwesome type="brands" icon="square-facebook" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.tiktok.com/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="TikTok"
-              >
-                <FontAwesome type="brands" icon="tiktok" />
-              </a>
-            </li>
+            {!!instagram && (
+              <li>
+                <a
+                  href={instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Instagram"
+                >
+                  <FontAwesome type="brands" icon="instagram" />
+                </a>
+              </li>
+            )}
+
+            {!!facebook && (
+              <li>
+                <a
+                  href={facebook}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Facebook"
+                >
+                  <FontAwesome type="brands" icon="square-facebook" />
+                </a>
+              </li>
+            )}
+
+            {!!tiktok && (
+              <li>
+                <a
+                  href={tiktok}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="TikTok"
+                >
+                  <FontAwesome type="brands" icon="tiktok" />
+                </a>
+              </li>
+            )}
+
+            {!!youtube && (
+              <li>
+                <a
+                  href={youtube}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Youtube"
+                >
+                  <FontAwesome type="brands" icon="youtube" />
+                </a>
+              </li>
+            )}
+
+            {!!whatsapp && (
+              <li>
+                <a
+                  href={`https://api.whatsapp.com/send?phone=${whatsapp}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Whatsapp"
+                >
+                  <FontAwesome type="brands" icon="whatsapp" />
+                </a>
+              </li>
+            )}
           </ul>
         </nav>
       </S.HeaderSocialMedia>
@@ -73,7 +108,7 @@ export default function Header({ ...rest }: HeaderProps) {
           <li>
             <NavLink to={`/`}>Todos</NavLink>
           </li>
-          {Object.keys(data).map((category) => (
+          {Object.keys(data.content).map((category) => (
             <li key={category}>
               <NavLink to={`/${category.toLowerCase()}`}>{category}</NavLink>
             </li>

@@ -114,7 +114,7 @@ const theme = {
   },
   BREAKPOINTS: {
     XS: 0,
-    SM: 400,
+    SM: 480,
     MD: 768,
     LG: 1024,
     XL: 1280,

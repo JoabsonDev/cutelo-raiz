@@ -7,9 +7,10 @@ import { useParams } from "react-router-dom";
 import * as S from "./styles";
 
 function getAllProducts(data: Record<string, Product[]>): Product[] {
-  return Object.values(data).reduce((acc, produtos) => {
+  const products = Object.values(data).reduce((acc, produtos) => {
     return acc.concat(produtos);
   }, [] as Product[]);
+  return products;
 }
 
 function getProductsByCategory(
@@ -27,14 +28,11 @@ export default function Home() {
   const { category } = useParams();
   const [products, setProducts] = useState<Product[]>([]);
 
-  const { data, isLoading, isFetching, error } = useQuery<Record<
-    string,
-    Product[]
-  > | null>(
+  const { data, isLoading, isFetching, error } = useQuery<AppResponse | null>(
     ["home"],
     async () => {
-      const { data } = await axios.get<Record<string, Product[]>>(
-        "https://script.google.com/macros/s/AKfycbzpV6Hjrmz2oio5LQOwaQTLNNxCYwhZgfHVlfNa3QmrTeHqkwmpSRKr3A1yMI-P3_Q/exec"
+      const { data } = await axios.get<AppResponse>(
+        "https://script.google.com/macros/s/AKfycbxtApmgbGZm-217ztayy0U_puz3fXYMDV8wDy0borPOFen8Ysm3ntSmRyVT2cxHG3Lu/exec"
       );
       return data;
     },
@@ -45,13 +43,11 @@ export default function Home() {
 
   useEffect(() => {
     if (!category && data) {
-      setProducts(getAllProducts(data));
+      setProducts(getAllProducts(data.content));
     } else if (category && data) {
-      setProducts(getProductsByCategory(data, category));
+      setProducts(getProductsByCategory(data.content, category));
     }
-
-    console.log(products);
-  }, [category, data]);
+  }, [category, data?.content]);
 
   if (isLoading || isFetching)
     return (
