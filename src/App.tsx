@@ -1,5 +1,3 @@
-import Head from "@organisms/Head";
-import { HelmetProvider } from "react-helmet-async";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ThemeProvider } from "styled-components";
 import theme from "./constants/theme";
@@ -12,11 +10,8 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <HelmetProvider>
-          <Head />
-          <GlobalStyle />
-          <Router />
-        </HelmetProvider>
+        <GlobalStyle />
+        <Router />
       </QueryClientProvider>
     </ThemeProvider>
   );

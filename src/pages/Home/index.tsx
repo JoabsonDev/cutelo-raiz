@@ -32,7 +32,7 @@ export default function Home() {
     ["home"],
     async () => {
       const { data } = await axios.get<AppResponse>(
-        "https://script.google.com/macros/s/AKfycbxtApmgbGZm-217ztayy0U_puz3fXYMDV8wDy0borPOFen8Ysm3ntSmRyVT2cxHG3Lu/exec"
+        import.meta.env.VITE_API_URL
       );
       return data;
     },

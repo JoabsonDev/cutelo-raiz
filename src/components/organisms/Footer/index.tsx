@@ -114,7 +114,9 @@ export default function Footer({ ...rest }: FooterProps) {
         )}
       </ul>
 
-      <p>© Copyright 2025 - Todos os Direitos Reservados</p>
+      <p>
+        © Copyright {new Date().getFullYear()} - Todos os Direitos Reservados
+      </p>
     </S.Footer>
   );
 }
