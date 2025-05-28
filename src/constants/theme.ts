@@ -1,4 +1,4 @@
-import { css } from "styled-components"
+import { css } from "styled-components";
 
 const theme = {
   COLORS: {
@@ -114,7 +114,7 @@ const theme = {
   },
   BREAKPOINTS: {
     XS: 0,
-    SM: 640,
+    SM: 400,
     MD: 768,
     LG: 1024,
     XL: 1280,
@@ -183,15 +183,10 @@ const theme = {
   },
   NICE_TEXT: (color = "", strokeColor = "") => css`
     color: ${color};
-    text-shadow:
-      0 0.1em 1.25em ${strokeColor},
-      0.05em -0.03em 0 ${strokeColor},
-      0.05em 0.005em 0 ${strokeColor},
-      0em 0.08em 0 ${strokeColor},
-      0.05em 0.08em 0 ${strokeColor},
-      0em -0.03em 0 ${strokeColor},
-      -0.03em -0.03em 0 ${strokeColor},
-      -0.03em 0.08em 0 ${strokeColor},
+    text-shadow: 0 0.1em 1.25em ${strokeColor}, 0.05em -0.03em 0 ${strokeColor},
+      0.05em 0.005em 0 ${strokeColor}, 0em 0.08em 0 ${strokeColor},
+      0.05em 0.08em 0 ${strokeColor}, 0em -0.03em 0 ${strokeColor},
+      -0.03em -0.03em 0 ${strokeColor}, -0.03em 0.08em 0 ${strokeColor},
       -0.03em 0 0 ${strokeColor};
   `,
   SCROLLBAR: (thumbColor = "", thumbColorHover = "") => css`
@@ -228,6 +223,6 @@ const theme = {
   DEFAULT_TRANSITION: css`
     transition: all 300ms ease-in-out;
   `,
-} as const
+} as const;
 
-export default theme
+export default theme;

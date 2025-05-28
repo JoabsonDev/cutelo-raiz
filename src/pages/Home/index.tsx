@@ -1,17 +1,39 @@
 import Header from "@organisms/Header";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
 import * as S from "./styles";
 
-export default function Home() {
-  // const navigate = useNavigate();
-  // const location = useLocation();
+function getAllProducts(data: Record<string, Product[]>): Product[] {
+  return Object.values(data).reduce((acc, produtos) => {
+    return acc.concat(produtos);
+  }, [] as Product[]);
+}
 
-  const { data, isLoading, isFetching, error } = useQuery<any | null>(
+function getProductsByCategory(
+  data: Record<string, Product[]>,
+  category: string
+): Product[] {
+  const categoriaOriginal = Object.keys(data).find(
+    (key) => key.toLowerCase() === category.toLowerCase()
+  )!;
+
+  return categoriaOriginal ? data[categoriaOriginal] : [];
+}
+
+export default function Home() {
+  const { category } = useParams();
+  const [products, setProducts] = useState<Product[]>([]);
+
+  const { data, isLoading, isFetching, error } = useQuery<Record<
+    string,
+    Product[]
+  > | null>(
     ["home"],
     async () => {
-      const { data } = await axios.get<any>(
-        "https://script.google.com/macros/s/AKfycbwpEAdgcPgHpoG8Bnu7bODpZIXFPHmSPnfZaxKdPGY9bTcpb3PYDgneaDOzoEYOwm-8/exec"
+      const { data } = await axios.get<Record<string, Product[]>>(
+        "https://script.google.com/macros/s/AKfycbzpV6Hjrmz2oio5LQOwaQTLNNxCYwhZgfHVlfNa3QmrTeHqkwmpSRKr3A1yMI-P3_Q/exec"
       );
       return data;
     },
@@ -20,7 +42,15 @@ export default function Home() {
     }
   );
 
-  console.log(data);
+  useEffect(() => {
+    if (!category && data) {
+      setProducts(getAllProducts(data));
+    } else if (category && data) {
+      setProducts(getProductsByCategory(data, category));
+    }
+
+    console.log(products);
+  }, [category, data]);
 
   if (isLoading || isFetching)
     return (
