@@ -1,3 +1,4 @@
+import Footer from "@organisms/Footer";
 import Header from "@organisms/Header";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -72,7 +73,7 @@ export default function Home() {
   //   ).length > 0;
 
   return (
-    <>
+    <S.HomeGrid>
       <Header />
 
       <S.HomeContainer>
@@ -92,6 +93,7 @@ export default function Home() {
 
       <ProductList /> */}
       </S.HomeContainer>
-    </>
+      <Footer />
+    </S.HomeGrid>
   );
 }

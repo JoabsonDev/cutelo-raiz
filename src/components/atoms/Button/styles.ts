@@ -1,12 +1,12 @@
-import styled, { css } from "styled-components"
+import styled, { css } from "styled-components";
 
-import { spin } from "@styles/animations"
+import { spin } from "@styles/animations";
 
 export type ButtonContainerProps = {
-  $variation?: "primary" | "secondary" | "light" | "dark" | "danger"
-  $fullWidth?: boolean
-  $isLoading?: boolean
-}
+  $variation?: "primary" | "secondary" | "light" | "dark" | "danger";
+  $fullWidth?: boolean;
+  $isLoading?: boolean;
+};
 export const ButtonContainer = styled.button<ButtonContainerProps>`
   ${({ theme }) => theme.CLEAR_BUTTON};
   ${({ theme, $variation = "light", disabled }) =>
@@ -16,29 +16,29 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
         switch ($variation) {
           case "primary":
             return css`
-              background-color: var(--clr-primary-400);
+              background-color: ${theme.COLORS.ORANGE[500]};
               color: ${theme.COLORS.WHITE};
-            `
+            `;
           case "secondary":
             return css`
               background-color: ${theme.COLORS.NEUTRAL[300]};
               color: ${theme.COLORS.NEUTRAL[800]};
-            `
+            `;
           case "light":
             return css`
               background-color: ${theme.COLORS.WHITE};
               color: ${theme.COLORS.NEUTRAL[800]};
-            `
+            `;
           case "dark":
             return css`
               background-color: ${theme.COLORS.NEUTRAL[800]};
               color: ${theme.COLORS.WHITE};
-            `
+            `;
           case "danger":
             return css`
               background-color: ${theme.COLORS.RED[700]};
               color: ${theme.COLORS.WHITE};
-            `
+            `;
         }
       })()};
     `};
@@ -71,15 +71,15 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
         background-color: ${(() => {
           switch ($variation) {
             case "primary":
-              return "var(--clr-primary-500)"
+              return theme.COLORS.ORANGE[700];
             case "secondary":
-              return theme.COLORS.NEUTRAL[400]
+              return theme.COLORS.NEUTRAL[400];
             case "light":
-              return theme.COLORS.NEUTRAL[400]
+              return theme.COLORS.NEUTRAL[400];
             case "dark":
-              return theme.COLORS.NEUTRAL[600]
+              return theme.COLORS.NEUTRAL[600];
             case "danger":
-              return theme.COLORS.RED[800]
+              return theme.COLORS.RED[800];
           }
         })()};
       `}
@@ -95,4 +95,4 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
     background-color: ${({ theme }) => theme.COLORS.NEUTRAL[200]};
     color: ${({ theme }) => theme.COLORS.NEUTRAL[500]};
   }
-`
+`;

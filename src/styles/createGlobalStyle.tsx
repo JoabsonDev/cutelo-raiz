@@ -20,10 +20,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body{
-    min-height: 100vh;
+    min-height: 100dvh;
     font-family: ${({ theme }) => theme.FONT.FAMILY.POPPINS};
     background-color: ${({ theme }) => theme.COLORS.WHITE};
-    padding-bottom: ${({ theme }) => theme.BOTTOM_NAVIGATION_HEIGHT}px;
   }
 
   a, button, input, textarea, select {

@@ -126,7 +126,6 @@ const theme = {
   `,
   SIDEBAR_WIDTH: 240,
   HEADER_HEIGHT: 64,
-  BOTTOM_NAVIGATION_HEIGHT: 68,
   CLEAR_BUTTON: css`
     border: none;
     background-color: transparent;
