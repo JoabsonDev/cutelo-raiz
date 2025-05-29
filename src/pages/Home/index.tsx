@@ -1,3 +1,4 @@
+import products from "@helpers/parse-products";
 import NoData from "@molecules/NoData";
 import FeaturedProductsCarousel from "@organisms/FeaturedProductsCarousel";
 import ProductList from "@organisms/ProductList";
@@ -6,23 +7,7 @@ import { useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import * as S from "./styles";
 
-function getAllProducts(data: Record<string, Product[]>): Product[] {
-  const products = Object.values(data).reduce((acc, produtos) => {
-    return acc.concat(produtos);
-  }, [] as Product[]);
-  return products;
-}
-
-function getProductsByCategory(
-  data: Record<string, Product[]>,
-  category: string
-): Product[] {
-  const categoriaOriginal = Object.keys(data).find(
-    (key) => key.toLowerCase() === category.toLowerCase()
-  )!;
-
-  return categoriaOriginal ? data[categoriaOriginal] : [];
-}
+const { getAll, getByCategory } = products();
 
 export default function Home() {
   const { category } = useParams();
@@ -33,9 +18,9 @@ export default function Home() {
 
   useEffect(() => {
     if (!category && data) {
-      setProducts(getAllProducts(data.content));
+      setProducts(getAll(data.content));
     } else if (category && data) {
-      setProducts(getProductsByCategory(data.content, category));
+      setProducts(getByCategory(data.content, category));
     }
   }, [category, data?.content]);
 

@@ -23,8 +23,6 @@ export default function FeaturedProductsCarousel({ products }: Props) {
       navigation
       pagination={{ clickable: true }}
       centeredSlides={true}
-      // onSwiper={(swiper) => console.log(swiper)}
-      // onSlideChange={() => console.log("slide change")}
       autoplay={{
         delay: 5000,
         disableOnInteraction: false,
