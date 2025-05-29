@@ -63,6 +63,7 @@ export default function Home() {
   //       <NoData>bla bla bla</NoData>
   //     </S.HomeContainer>
   //   );
+  const hasHighlight = products.some((product) => product.highlight === "Sim");
 
   return (
     <S.HomeGrid>
@@ -70,7 +71,7 @@ export default function Home() {
 
       <S.HomeContainer>
         <div className="container">
-          {products.length > 0 && (
+          {hasHighlight && (
             <>
               <S.SectionTitle>Destaques</S.SectionTitle>
               <FeaturedProductsCarousel
