@@ -1,3 +1,4 @@
+import FeaturedProductsCarousel from "@organisms/FeaturedProductsCarousel";
 import Footer from "@organisms/Footer";
 import Header from "@organisms/Header";
 import axios from "axios";
@@ -73,14 +74,18 @@ export default function Home() {
       <Header />
 
       <S.HomeContainer>
-        {/* {hasRecommended && (
-        <>
-          <Title>{t("home.highlights.title")}</Title>
-          <HomeSlider className="home-slider" />
-        </>
-      )} */}
-
-        <S.SectionDescription>descrição</S.SectionDescription>
+        <div className="container">
+          {products.length > 0 && (
+            <>
+              <S.SectionTitle>Destaques</S.SectionTitle>
+              <FeaturedProductsCarousel
+                products={products.filter(
+                  (product) => product.highlight === "Sim"
+                )}
+              />
+            </>
+          )}
+        </div>
 
         {/* <CategoriesMenu
         categories={data.categories}

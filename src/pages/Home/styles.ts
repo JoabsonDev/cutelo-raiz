@@ -6,8 +6,9 @@ export const HomeGrid = styled.div`
   min-height: 100dvh;
 `;
 
-export const HomeContainer = styled.div`
+export const HomeContainer = styled.main`
   ${({ theme }) => theme.PADDING_DEFAULT};
+  min-height: 300px;
 
   .categories-menu {
     padding-block: 12px;
@@ -23,9 +24,9 @@ export const HomeContainer = styled.div`
   }
 `;
 
-export const SectionDescription = styled.p`
+export const SectionTitle = styled.h2`
   color: ${({ theme }) => theme.COLORS.NEUTRAL[500]};
-  font-size: clamp(14px, 1.5vw, 16px);
+  font-size: clamp(16px, 1.5vw, 20px);
 `;
 
 export const HomeNoData = styled.p`

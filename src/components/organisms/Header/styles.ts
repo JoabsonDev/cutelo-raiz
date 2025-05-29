@@ -52,7 +52,6 @@ export const HeaderTop = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
-  border-bottom: 1px solid ${({ theme }) => theme.COLORS.NEUTRAL[700]};
   padding: 8px 16px;
 `;
 
@@ -77,6 +76,7 @@ export const HeaderCartButton = styled.button`
 export const HeaderBottom = styled.nav`
   margin-block: 16px 8px;
   padding: 8px 16px;
+  border-top: 1px solid ${({ theme }) => theme.COLORS.NEUTRAL[700]};
 
   ul {
     ${({ theme }) => theme.CLEAR_LIST};
