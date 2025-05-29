@@ -8,7 +8,7 @@ export const HomeGrid = styled.div`
 
 export const HomeContainer = styled.main`
   ${({ theme }) => theme.PADDING_DEFAULT};
-  min-height: 300px;
+  min-height: 320px;
 
   .categories-menu {
     padding-block: 12px;
