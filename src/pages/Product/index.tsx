@@ -1,4 +1,7 @@
+import Button from "@atoms/Button";
 import products from "@helpers/parse-products";
+import toCurrency from "@helpers/to-currency";
+import useCartStore from "@store/cart";
 import { useState } from "react";
 import ReactImageMagnify from "react-image-magnify";
 import { useQueryClient } from "react-query";
@@ -9,6 +12,7 @@ const { getAll } = products();
 
 export default function Product() {
   const { id } = useParams();
+  const { cart, updateCart } = useCartStore();
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<AppResponse>(["home"]);
 
@@ -21,7 +25,10 @@ export default function Product() {
     <S.ProductContainer className="container">
       <S.ProductGalery>
         {!!product?.image1 && (
-          <S.ProductDetailButtonTrigger>
+          <S.ProductDetailButtonTrigger
+            className={activeImage === product?.image1 ? "active" : ""}
+            onMouseEnter={() => setActiveImage(product?.image1 || "")}
+          >
             <img
               src={product?.image1}
               alt={`Imagem do produto ${product?.name}`}
@@ -29,7 +36,10 @@ export default function Product() {
           </S.ProductDetailButtonTrigger>
         )}
         {!!product?.image2 && (
-          <S.ProductDetailButtonTrigger>
+          <S.ProductDetailButtonTrigger
+            className={activeImage === product?.image2 ? "active" : ""}
+            onMouseEnter={() => setActiveImage(product?.image2 || "")}
+          >
             <img
               src={product?.image2}
               alt={`Imagem do produto ${product?.name}`}
@@ -37,7 +47,10 @@ export default function Product() {
           </S.ProductDetailButtonTrigger>
         )}
         {!!product?.image3 && (
-          <S.ProductDetailButtonTrigger>
+          <S.ProductDetailButtonTrigger
+            className={activeImage === product?.image3 ? "active" : ""}
+            onMouseEnter={() => setActiveImage(product?.image3 || "")}
+          >
             <img
               src={product?.image3}
               alt={`Imagem do produto ${product?.name}`}
@@ -45,7 +58,10 @@ export default function Product() {
           </S.ProductDetailButtonTrigger>
         )}
         {!!product?.image4 && (
-          <S.ProductDetailButtonTrigger>
+          <S.ProductDetailButtonTrigger
+            className={activeImage === product?.image4 ? "active" : ""}
+            onMouseEnter={() => setActiveImage(product?.image4 || "")}
+          >
             <img
               src={product?.image4}
               alt={`Imagem do produto ${product?.name}`}
@@ -70,6 +86,40 @@ export default function Product() {
           />
         </S.ReactImageMagnifyWrapper>
       </S.ProductGalery>
+      <S.ProductDetail>
+        <S.ProductDetailTitle>{product?.name}</S.ProductDetailTitle>
+        <S.ProductDetailDescription>
+          {product?.description}
+        </S.ProductDetailDescription>
+
+        <S.ProductDetailPriceContainer>
+          {!!product?.promoPrice && (
+            <S.ProductDetailPromotionalPrice>
+              {toCurrency(product?.price)}
+            </S.ProductDetailPromotionalPrice>
+          )}
+          <S.ProductDetailPrice
+            className={!!product?.promoPrice ? "has-promo" : ""}
+          >
+            {product?.promoPrice!
+              ? toCurrency(product?.promoPrice)
+              : toCurrency(product?.price!)}
+          </S.ProductDetailPrice>
+        </S.ProductDetailPriceContainer>
+
+        <Button
+          variation="primary"
+          onClick={() =>
+            cart.some((item) => item.productId === product?.id)
+              ? updateCart({ productId: product?.id!, quantity: 0 })
+              : updateCart({ productId: product?.id!, quantity: 1 })
+          }
+        >
+          {cart.some((item) => item.productId === product?.id)
+            ? "Remover do carrinho"
+            : "Adicionar ao carrinho"}
+        </Button>
+      </S.ProductDetail>
     </S.ProductContainer>
   );
 }

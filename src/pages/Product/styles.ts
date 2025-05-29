@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
-export const ProductContainer = styled.div``;
+export const ProductContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 24px;
+`;
 export const ProductGalery = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
@@ -14,6 +19,8 @@ export const ProductGalery = styled.div`
     ". image"
     ". image";
   gap: 8px;
+  position: sticky;
+  top: 240px;
 `;
 export const ProductDetailButtonTrigger = styled.button`
   ${({ theme }) => theme.CLEAR_BUTTON};
@@ -37,5 +44,57 @@ export const ProductDetailButtonTrigger = styled.button`
 
 export const ReactImageMagnifyWrapper = styled.div`
   grid-area: image;
-  max-width: 358px;
+  width: 358px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+export const ProductDetail = styled.div`
+  button {
+    margin-top: 16px;
+  }
+`;
+export const ProductDetailTitle = styled.h2`
+  font-size: clamp(24px, 2vw, 32px);
+  color: ${({ theme }) => theme.COLORS.NEUTRAL[800]};
+`;
+export const ProductDetailDescription = styled.p`
+  font-size: clamp(14px, 1vw, 16px);
+  color: ${({ theme }) => theme.COLORS.NEUTRAL[600]};
+`;
+export const ProductDetailPromotionalPrice = styled.span`
+  position: relative;
+  font-size: clamp(16px, 2vw, 20px);
+  z-index: -1;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 11px;
+    left: 0;
+    width: 108%;
+    height: 100%;
+    transform: rotate(-12deg);
+    transform-origin: center;
+    border-top: 2px solid ${({ theme }) => theme.COLORS.RED[500]};
+  }
+`;
+export const ProductDetailPrice = styled.span`
+  font-size: clamp(20px, 2.5vw, 28px);
+
+  &.has-promo {
+    ${({ theme }) =>
+      theme.NICE_TEXT(theme.COLORS.NEUTRAL[800], theme.COLORS.NEUTRAL[50])};
+    font-weight: ${({ theme }) => theme.FONT.WEIGHT.BOLD};
+  }
+`;
+
+export const ProductDetailPriceContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
 `;

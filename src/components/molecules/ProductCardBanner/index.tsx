@@ -32,7 +32,9 @@ export default function ProductCardBanner({
           <S.ProductCardPrice
             className={!!product.promoPrice ? "has-promo" : ""}
           >
-            {toCurrency(product.promoPrice) || toCurrency(product.price)}
+            {product.promoPrice
+              ? toCurrency(product.promoPrice)
+              : toCurrency(product.price)}
           </S.ProductCardPrice>
         </S.ProductCardPriceContainer>
 

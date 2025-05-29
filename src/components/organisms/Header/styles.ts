@@ -101,6 +101,10 @@ export const HeaderBottom = styled.nav`
           color: ${({ theme }) => theme.COLORS.ORANGE[500]};
           transition: all 300ms ease-in-out;
         }
+
+        i {
+          margin-right: 8px;
+        }
       }
     }
   }

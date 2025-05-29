@@ -5,17 +5,22 @@ import logo from "@assets/logo.png";
 import CartIcon from "@atoms/CartIcon";
 import FontAwesome from "@atoms/FontAwesome";
 import Search from "@atoms/Search";
+import useCartStore from "@store/cart";
 import { useQueryClient } from "react-query";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 
 type HeaderProps = ComponentProps<typeof S.Header>;
 
 export default function Header({ ...rest }: HeaderProps) {
   const { id } = useParams();
+  const { pathname } = useLocation();
+  const { cart } = useCartStore();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<AppResponse>(["home"]);
 
   if (!data) return null;
+
   const { instagram, facebook, tiktok, youtube, whatsapp } = data.configs;
 
   return (
@@ -100,13 +105,13 @@ export default function Header({ ...rest }: HeaderProps) {
 
           <Search placeholder="Digite o nome do produto" />
 
-          <S.HeaderCartButton>
-            <CartIcon data-value="1" />
+          <S.HeaderCartButton onClick={() => navigate("/cart")}>
+            <CartIcon data-value={cart.length} />
           </S.HeaderCartButton>
         </S.HeaderTop>
       </div>
-      {!id && (
-        <S.HeaderBottom>
+      <S.HeaderBottom>
+        {!id && pathname !== "/cart" ? (
           <ul>
             <li>
               <NavLink to={`/`}>Todos</NavLink>
@@ -117,8 +122,17 @@ export default function Header({ ...rest }: HeaderProps) {
               </li>
             ))}
           </ul>
-        </S.HeaderBottom>
-      )}
+        ) : (
+          <ul>
+            <li>
+              <NavLink to={"/"}>
+                <FontAwesome type="solid" icon="house" />
+                Início
+              </NavLink>
+            </li>
+          </ul>
+        )}
+      </S.HeaderBottom>
     </S.Header>
   );
 }
