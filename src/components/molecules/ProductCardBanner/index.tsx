@@ -36,7 +36,7 @@ export default function ProductCardBanner({
           </S.ProductCardPrice>
         </S.ProductCardPriceContainer>
 
-        <NavLinkButton to={`/produto/${product.id}`}>
+        <NavLinkButton to={`/product/${product.id}`}>
           Ver detalhes
         </NavLinkButton>
       </S.ProductCardInfoContainer>

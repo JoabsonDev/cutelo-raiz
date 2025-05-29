@@ -51,7 +51,7 @@ export default function ProductItem({
           </S.ListItemTips>
         )}
 
-        <NavLinkButton to={`/produto/${product.id}`} className="full">
+        <NavLinkButton to={`/product/${product.id}`} className="full">
           Ver detalhes
         </NavLinkButton>
       </S.ContentWrapper>

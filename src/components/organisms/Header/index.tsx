@@ -6,11 +6,12 @@ import CartIcon from "@atoms/CartIcon";
 import FontAwesome from "@atoms/FontAwesome";
 import Search from "@atoms/Search";
 import { useQueryClient } from "react-query";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 type HeaderProps = ComponentProps<typeof S.Header>;
 
 export default function Header({ ...rest }: HeaderProps) {
+  const { id } = useParams();
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<AppResponse>(["home"]);
 
@@ -104,19 +105,20 @@ export default function Header({ ...rest }: HeaderProps) {
           </S.HeaderCartButton>
         </S.HeaderTop>
       </div>
-
-      <S.HeaderBottom>
-        <ul>
-          <li>
-            <NavLink to={`/`}>Todos</NavLink>
-          </li>
-          {Object.keys(data.content).map((category) => (
-            <li key={category}>
-              <NavLink to={`/${category.toLowerCase()}`}>{category}</NavLink>
+      {!id && (
+        <S.HeaderBottom>
+          <ul>
+            <li>
+              <NavLink to={`/`}>Todos</NavLink>
             </li>
-          ))}
-        </ul>
-      </S.HeaderBottom>
+            {Object.keys(data.content).map((category) => (
+              <li key={category}>
+                <NavLink to={`/${category.toLowerCase()}`}>{category}</NavLink>
+              </li>
+            ))}
+          </ul>
+        </S.HeaderBottom>
+      )}
     </S.Header>
   );
 }

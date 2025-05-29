@@ -1,11 +1,8 @@
 import NoData from "@molecules/NoData";
 import FeaturedProductsCarousel from "@organisms/FeaturedProductsCarousel";
-import Footer from "@organisms/Footer";
-import Header from "@organisms/Header";
 import ProductList from "@organisms/ProductList";
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import * as S from "./styles";
 
@@ -31,18 +28,8 @@ export default function Home() {
   const { category } = useParams();
   const [products, setProducts] = useState<Product[]>([]);
 
-  const { data, isLoading, isFetching, error } = useQuery<AppResponse | null>(
-    ["home"],
-    async () => {
-      const { data } = await axios.get<AppResponse>(
-        import.meta.env.VITE_API_URL
-      );
-      return data;
-    },
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+  const queryClient = useQueryClient();
+  const data = queryClient.getQueryData<AppResponse>(["home"]);
 
   useEffect(() => {
     if (!category && data) {
@@ -52,49 +39,26 @@ export default function Home() {
     }
   }, [category, data?.content]);
 
-  if (isLoading || isFetching)
-    return (
-      <S.HomeContainer>
-        <div>shimmer aqui</div>
-      </S.HomeContainer>
-    );
-
-  if (!data || error || products.length === 0)
-    return (
-      <S.HomeContainer>
-        <NoData>Não há produtos nessa categoria</NoData>
-      </S.HomeContainer>
-    );
-
   const hasHighlight = products.some((product) => product.highlight === "Sim");
 
   return (
-    <S.HomeGrid>
-      <Header />
-
-      <S.HomeContainer>
-        <div className="container">
-          {hasHighlight && (
-            <>
-              <S.SectionTitle>Destaques</S.SectionTitle>
-              <FeaturedProductsCarousel
-                products={products.filter(
-                  (product) => product.highlight === "Sim"
-                )}
-              />
-            </>
-          )}
-          {!data || error || products.length === 0 ? (
-            <NoData>Não há produtos nessa categoria</NoData>
-          ) : (
-            <>
-              <S.SectionTitle>Lista de produtos</S.SectionTitle>
-              <ProductList products={products} />
-            </>
-          )}
-        </div>
-      </S.HomeContainer>
-      <Footer />
-    </S.HomeGrid>
+    <S.HomeContainer className="container">
+      {hasHighlight && (
+        <>
+          <S.SectionTitle>Destaques</S.SectionTitle>
+          <FeaturedProductsCarousel
+            products={products.filter((product) => product.highlight === "Sim")}
+          />
+        </>
+      )}
+      {!data || products.length === 0 ? (
+        <NoData>Não há produtos nessa categoria</NoData>
+      ) : (
+        <>
+          <S.SectionTitle>Lista de produtos</S.SectionTitle>
+          <ProductList products={products} />
+        </>
+      )}
+    </S.HomeContainer>
   );
 }
