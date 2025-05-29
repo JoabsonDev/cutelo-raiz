@@ -33,6 +33,32 @@ export default function Cart() {
     }, 0);
   };
 
+  function sendWhatsappMessage() {
+    const { whatsapp } = data?.configs!;
+
+    const mapped = products.map((product) => ({
+      ...product,
+      ...getCartProduct(product.id),
+    }));
+
+    const lines = [
+      "Olá! 👋",
+      "Tudo bem?",
+      "",
+      "Gostaria de adquirir o(s) seguinte(s) produto(s): 🛒",
+      ...mapped.map((item) => `• ${item.quantity}un - ${item.name}`),
+      "",
+      "Aguardo retorno para finalizar a compra! 😊",
+    ];
+
+    const message = lines.join("\n");
+    const whatsappLink = `https://api.whatsapp.com/send?phone=55${whatsapp}&text=${encodeURIComponent(
+      message
+    )}`;
+
+    window.open(whatsappLink);
+  }
+
   return (
     <S.CartContainer className="container">
       {!!cart.length && (
@@ -69,7 +95,7 @@ export default function Cart() {
           <strong>{toCurrency(getTotal())}</strong>
         </div>
         <div>
-          <Button variation="primary" fullWidth>
+          <Button variation="primary" fullWidth onClick={sendWhatsappMessage}>
             Finalizar compra
           </Button>
         </div>
