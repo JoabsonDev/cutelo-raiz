@@ -80,7 +80,7 @@ export default function Header({ ...rest }: HeaderProps) {
               {!!whatsapp && (
                 <li>
                   <a
-                    href={`https://api.whatsapp.com/send?phone=${whatsapp}`}
+                    href={`https://api.whatsapp.com/send?phone=55${whatsapp}`}
                     target="_blank"
                     rel="noreferrer"
                     aria-label="Whatsapp"

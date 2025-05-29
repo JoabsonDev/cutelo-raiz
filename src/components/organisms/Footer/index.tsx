@@ -34,7 +34,7 @@ export default function Footer({ ...rest }: FooterProps) {
         {!!whatsapp && (
           <li>
             <S.LinkWhatsButton
-              href={`https://api.whatsapp.com/send?phone=${whatsapp}`}
+              href={`https://api.whatsapp.com/send?phone=55${whatsapp}`}
               target="_blank"
               rel="noreferrer"
               aria-label="Contate-nos Via
@@ -103,7 +103,7 @@ export default function Footer({ ...rest }: FooterProps) {
         {!!whatsapp && (
           <li>
             <a
-              href={`https://api.whatsapp.com/send?phone=${whatsapp}`}
+              href={`https://api.whatsapp.com/send?phone=55${whatsapp}`}
               target="_blank"
               rel="noreferrer"
               aria-label="Whatsapp"
