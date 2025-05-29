@@ -52,7 +52,7 @@ export default function ProductItem({
         )}
 
         <Button variation="primary" fullWidth>
-          Comprar
+          Ver detalhes
         </Button>
       </S.ContentWrapper>
     </S.ListItem>
