@@ -2,6 +2,7 @@ import type { ComponentProps } from "react";
 import * as S from "./styles";
 
 import FontAwesome from "@atoms/FontAwesome";
+import LinkButton from "@atoms/LinkButton";
 import formatPhone from "@helpers/format-phone";
 import { useQueryClient } from "react-query";
 
@@ -33,7 +34,7 @@ export default function Footer({ ...rest }: FooterProps) {
         )}
         {!!whatsapp && (
           <li>
-            <S.LinkWhatsButton
+            <LinkButton
               href={`https://api.whatsapp.com/send?phone=55${whatsapp}`}
               target="_blank"
               rel="noreferrer"
@@ -42,7 +43,7 @@ export default function Footer({ ...rest }: FooterProps) {
             >
               <FontAwesome type="brands" icon="whatsapp" /> Contate-nos Via
               Whatsapp
-            </S.LinkWhatsButton>
+            </LinkButton>
           </li>
         )}
       </ul>

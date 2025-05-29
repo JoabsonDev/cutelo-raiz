@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const Footer = styled.footer`
   background-color: ${({ theme }) => theme.COLORS.NEUTRAL[900]};
@@ -49,23 +49,4 @@ export const Footer = styled.footer`
   p {
     font-size: clamp(12px, 1.5vw, 14px);
   }
-`;
-
-export const LinkWhatsButton = styled.a`
-  font-family: inherit;
-  transition: all 300ms ease-in-out;
-  user-select: none;
-  height: 40px;
-  border-radius: 4px;
-  font-size: 14px;
-  align-self: flex-start;
-  padding: 8px 12px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-
-  ${({ theme }) => css`
-    background-color: ${theme.COLORS.ORANGE[500]};
-    color: ${theme.COLORS.WHITE};
-  `};
 `;

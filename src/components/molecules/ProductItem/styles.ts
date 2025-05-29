@@ -77,7 +77,7 @@ export const ContentWrapper = styled.div`
   align-items: flex-start;
   height: 100%;
 
-  button {
+  a {
     margin-top: 16px;
   }
 `;

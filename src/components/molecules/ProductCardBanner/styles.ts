@@ -20,7 +20,7 @@ export const ProductCardInfoContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
 
-  button {
+  a {
     margin-top: 16px;
   }
 `;

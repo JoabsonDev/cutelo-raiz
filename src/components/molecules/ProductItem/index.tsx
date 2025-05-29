@@ -4,7 +4,7 @@ import FontAwesome from "@atoms/FontAwesome";
 import toCurrency from "@helpers/to-currency";
 import useCartStore from "@store/cart";
 
-import Button from "@atoms/Button";
+import NavLinkButton from "@atoms/NavLinkButton";
 import * as S from "./styles";
 
 type ProductItemProps = ComponentProps<typeof S.ListItem> & {
@@ -51,9 +51,9 @@ export default function ProductItem({
           </S.ListItemTips>
         )}
 
-        <Button variation="primary" fullWidth>
+        <NavLinkButton to={`/produto/${product.id}`} className="full">
           Ver detalhes
-        </Button>
+        </NavLinkButton>
       </S.ContentWrapper>
     </S.ListItem>
   );

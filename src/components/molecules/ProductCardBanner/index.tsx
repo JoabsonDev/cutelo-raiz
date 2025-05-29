@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
 
-import Button from "@atoms/Button";
+import NavLinkButton from "@atoms/NavLinkButton";
 import toCurrency from "@helpers/to-currency";
 import * as S from "./styles";
 
@@ -36,7 +36,9 @@ export default function ProductCardBanner({
           </S.ProductCardPrice>
         </S.ProductCardPriceContainer>
 
-        <Button variation="primary">Ver detalhes</Button>
+        <NavLinkButton to={`/produto/${product.id}`}>
+          Ver detalhes
+        </NavLinkButton>
       </S.ProductCardInfoContainer>
     </S.ProductCardBannerContainer>
   );
