@@ -52,9 +52,6 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  .swiper {
-    z-index: 2 !important;
-  }
 
   .container{
     max-width: 1366px;

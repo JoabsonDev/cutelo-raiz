@@ -125,7 +125,7 @@ const theme = {
     background-color: rgba(0, 0, 0, 0.1);
   `,
   SIDEBAR_WIDTH: 240,
-  HEADER_HEIGHT: 64,
+  HEADER_HEIGHT: 193,
   CLEAR_BUTTON: css`
     border: none;
     background-color: transparent;

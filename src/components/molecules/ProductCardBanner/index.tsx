@@ -36,7 +36,7 @@ export default function ProductCardBanner({
           </S.ProductCardPrice>
         </S.ProductCardPriceContainer>
 
-        <Button variation="primary">Saiba mais</Button>
+        <Button variation="primary">Comprar</Button>
       </S.ProductCardInfoContainer>
     </S.ProductCardBannerContainer>
   );

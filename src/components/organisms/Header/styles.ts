@@ -2,6 +2,10 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const Header = styled.header`
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 3;
+
   background-color: ${({ theme }) => theme.COLORS.NEUTRAL[900]};
   min-height: ${({ theme }) => theme.HEADER_HEIGHT}px;
   color: ${({ theme }) => theme.COLORS.NEUTRAL[50]};

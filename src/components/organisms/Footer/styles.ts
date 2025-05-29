@@ -5,6 +5,7 @@ export const Footer = styled.footer`
   color: ${({ theme }) => theme.COLORS.NEUTRAL[50]};
   padding: 8px 16px;
   text-align: center;
+  margin-top: 24px;
 
   a {
     ${({ theme }) => theme.CLEAR_LINK};

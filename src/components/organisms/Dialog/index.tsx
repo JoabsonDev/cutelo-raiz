@@ -1,18 +1,17 @@
-import { ComponentProps, useCallback, useEffect, useRef } from "react"
-import { t } from "i18next"
+import { useCallback, useEffect, useRef, type ComponentProps } from "react";
 
-import FontAwesome from "@atoms/FontAwesome"
+import FontAwesome from "@atoms/FontAwesome";
 
-import * as S from "./styles"
+import * as S from "./styles";
 
 type DialogProps = Omit<
   ComponentProps<typeof S.DialogWrapper>,
   "aria-labelledby"
 > & {
-  open?: boolean
-  onClose?: () => void
-  hasCloseButton?: boolean
-}
+  open?: boolean;
+  onClose?: () => void;
+  hasCloseButton?: boolean;
+};
 
 // TODO: criar transições entre outras propriedades do dialog
 // TODO: criar listener para entender se fechou com ESC para atualizar o estado
@@ -25,32 +24,32 @@ export default function Dialog({
   hasCloseButton = true,
   ...rest
 }: DialogProps) {
-  const dialogRef = useRef<HTMLDialogElement>(null)
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   const handleClose = useCallback(() => {
-    if (!dialogRef.current) return
+    if (!dialogRef.current) return;
 
-    onClose?.()
-    dialogRef.current.close()
-    document.body.classList.remove("overflow-hidden")
-  }, [onClose])
+    onClose?.();
+    dialogRef.current.close();
+    document.body.classList.remove("overflow-hidden");
+  }, [onClose]);
 
   useEffect(() => {
-    if (!dialogRef.current) return
+    if (!dialogRef.current) return;
 
-    const currentDialogRef = dialogRef.current
+    const currentDialogRef = dialogRef.current;
 
     if (open) {
-      currentDialogRef.showModal()
-      document.body.classList.add("overflow-hidden")
+      currentDialogRef.showModal();
+      document.body.classList.add("overflow-hidden");
     } else {
-      handleClose()
+      handleClose();
     }
 
     const handleBackdropClick = (event: MouseEvent) => {
-      if (!currentDialogRef) return
+      if (!currentDialogRef) return;
 
-      const rect = currentDialogRef.getBoundingClientRect()
+      const rect = currentDialogRef.getBoundingClientRect();
 
       if (
         event.clientX < rect.left ||
@@ -58,16 +57,16 @@ export default function Dialog({
         event.clientY < rect.top ||
         event.clientY > rect.bottom
       ) {
-        handleClose()
+        handleClose();
       }
-    }
+    };
 
-    currentDialogRef.addEventListener("click", handleBackdropClick)
+    currentDialogRef.addEventListener("click", handleBackdropClick);
 
     return () => {
-      currentDialogRef.removeEventListener("click", handleBackdropClick)
-    }
-  }, [open, handleClose])
+      currentDialogRef.removeEventListener("click", handleBackdropClick);
+    };
+  }, [open, handleClose]);
 
   return (
     <S.DialogWrapper
@@ -81,7 +80,7 @@ export default function Dialog({
           {hasCloseButton && (
             <S.DialogCloseButton
               onClick={handleClose}
-              aria-label={t("dialog.buttonCloseAriaLabel")}
+              aria-label="Fechar modal"
             >
               <FontAwesome icon="xmark" />
             </S.DialogCloseButton>
@@ -90,5 +89,5 @@ export default function Dialog({
         <S.DialogContent>{children}</S.DialogContent>
       </S.DialogContainer>
     </S.DialogWrapper>
-  )
+  );
 }

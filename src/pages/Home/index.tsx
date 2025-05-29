@@ -1,6 +1,8 @@
+import NoData from "@molecules/NoData";
 import FeaturedProductsCarousel from "@organisms/FeaturedProductsCarousel";
 import Footer from "@organisms/Footer";
 import Header from "@organisms/Header";
+import ProductList from "@organisms/ProductList";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
@@ -57,12 +59,13 @@ export default function Home() {
       </S.HomeContainer>
     );
 
-  // if (!data || error || data.categories.length === 0)
-  //   return (
-  //     <S.HomeContainer>
-  //       <NoData>bla bla bla</NoData>
-  //     </S.HomeContainer>
-  //   );
+  if (!data || error || products.length === 0)
+    return (
+      <S.HomeContainer>
+        <NoData>Não há produtos nessa categoria</NoData>
+      </S.HomeContainer>
+    );
+
   const hasHighlight = products.some((product) => product.highlight === "Sim");
 
   return (
@@ -81,14 +84,15 @@ export default function Home() {
               />
             </>
           )}
+          {!data || error || products.length === 0 ? (
+            <NoData>Não há produtos nessa categoria</NoData>
+          ) : (
+            <>
+              <S.SectionTitle>Lista de produtos</S.SectionTitle>
+              <ProductList products={products} />
+            </>
+          )}
         </div>
-
-        {/* <CategoriesMenu
-        categories={data.categories}
-        className="categories-menu"
-      />
-
-      <ProductList /> */}
       </S.HomeContainer>
       <Footer />
     </S.HomeGrid>
