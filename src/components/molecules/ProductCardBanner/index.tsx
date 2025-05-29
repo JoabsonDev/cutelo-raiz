@@ -1,5 +1,7 @@
 import type { ComponentProps } from "react";
 
+import Button from "@atoms/Button";
+import toCurrency from "@helpers/to-currency";
 import * as S from "./styles";
 
 type ProductCardBannerProps = ComponentProps<
@@ -14,8 +16,28 @@ export default function ProductCardBanner({
 }: ProductCardBannerProps) {
   return (
     <S.ProductCardBannerContainer {...rest}>
-      <span>{product.name}</span>
-      <img src={product.image1} alt="" />
+      <img src={product.image1} alt={`Imagem do produto ${product.name}`} />
+      <S.ProductCardInfoContainer>
+        <S.ProductCardTitle>{product.name}</S.ProductCardTitle>
+        <S.ProductCardDescription>
+          {product.description}
+        </S.ProductCardDescription>
+
+        <S.ProductCardPriceContainer>
+          {!!product.promoPrice && (
+            <S.ProductCardPromotionalPrice>
+              {toCurrency(product.price)}
+            </S.ProductCardPromotionalPrice>
+          )}
+          <S.ProductCardPrice
+            className={!!product.promoPrice ? "has-promo" : ""}
+          >
+            {toCurrency(product.promoPrice) || toCurrency(product.price)}
+          </S.ProductCardPrice>
+        </S.ProductCardPriceContainer>
+
+        <Button variation="primary">Saiba mais</Button>
+      </S.ProductCardInfoContainer>
     </S.ProductCardBannerContainer>
   );
 }

@@ -64,11 +64,6 @@ export default function Home() {
   //     </S.HomeContainer>
   //   );
 
-  // const hasRecommended =
-  //   extractProducts(data.categories).filter(
-  //     ({ isRecommended }) => isRecommended
-  //   ).length > 0;
-
   return (
     <S.HomeGrid>
       <Header />
