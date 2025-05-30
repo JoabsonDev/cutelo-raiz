@@ -1,15 +1,15 @@
-import { ComponentProps, forwardRef } from "react"
+import { forwardRef, type ComponentProps } from "react";
 
-import * as S from "./styles"
+import * as S from "./styles";
 
 type InputContainerProps = Omit<
   ComponentProps<typeof S.InputContainer>,
   "$fullWidth" | "$hasError"
 > & {
-  fullWidth?: boolean
-  type?: ComponentProps<typeof S.InputContainer>["type"] | "currency"
-  hasError?: boolean
-}
+  fullWidth?: boolean;
+  type?: ComponentProps<typeof S.InputContainer>["type"] | "currency";
+  hasError?: boolean;
+};
 
 const Input = forwardRef<HTMLInputElement, InputContainerProps>(function Input(
   { fullWidth, hasError, type = "text", className, ...rest },
@@ -27,7 +27,7 @@ const Input = forwardRef<HTMLInputElement, InputContainerProps>(function Input(
           $hasError={hasError}
         />
       </S.InputContainerWrapper>
-    )
+    );
   }
 
   return (
@@ -39,9 +39,9 @@ const Input = forwardRef<HTMLInputElement, InputContainerProps>(function Input(
       $fullWidth={fullWidth}
       $hasError={hasError}
     />
-  )
-})
+  );
+});
 
-Input.displayName = "Input"
+Input.displayName = "Input";
 
-export default Input
+export default Input;
