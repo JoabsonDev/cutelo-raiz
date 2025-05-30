@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const CartContainer = styled.div`
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
   gap: 24px;
   position: relative;
 `;
