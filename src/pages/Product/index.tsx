@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import ReactImageMagnify from "react-image-magnify";
 import { useQueryClient } from "react-query";
 import { useLocation, useParams } from "react-router-dom";
-import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
+import { A11y, Pagination, Scrollbar } from "swiper/modules";
 import { SwiperSlide } from "swiper/react";
 import * as S from "./styles";
 
@@ -97,10 +97,9 @@ export default function Product() {
 
       <S.ProductDetailMobileCarousel>
         <SwiperWrapper
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          modules={[Pagination, Scrollbar, A11y]}
           spaceBetween={50}
           slidesPerView={1}
-          navigation
           pagination={{ clickable: true }}
           centeredSlides={true}
         >

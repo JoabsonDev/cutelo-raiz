@@ -1,13 +1,7 @@
 import ProductCardBanner from "@molecules/ProductCardBanner";
 import { SwiperSlide } from "swiper/react";
 
-import {
-  A11y,
-  Autoplay,
-  Navigation,
-  Pagination,
-  Scrollbar,
-} from "swiper/modules";
+import { A11y, Autoplay, Pagination, Scrollbar } from "swiper/modules";
 import * as S from "./styles";
 
 type Props = {
@@ -17,10 +11,9 @@ type Props = {
 export default function FeaturedProductsCarousel({ products }: Props) {
   return (
     <S.SwiperWrapper
-      modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+      modules={[Pagination, Scrollbar, A11y, Autoplay]}
       spaceBetween={50}
       slidesPerView={1}
-      navigation
       pagination={{ clickable: true }}
       centeredSlides={true}
       autoplay={{
