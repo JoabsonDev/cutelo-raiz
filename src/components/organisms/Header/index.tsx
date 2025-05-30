@@ -1,4 +1,4 @@
-import type { ComponentProps } from "react";
+import { useEffect, type ComponentProps } from "react";
 import * as S from "./styles";
 
 import logo from "@assets/logo.png";
@@ -6,6 +6,7 @@ import CartIcon from "@atoms/CartIcon";
 import FontAwesome from "@atoms/FontAwesome";
 import Search from "@atoms/Search";
 import useCartStore from "@store/cart";
+import useSearchStore from "@store/search";
 import { useQueryClient } from "react-query";
 import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 
@@ -16,8 +17,34 @@ export default function Header({ ...rest }: HeaderProps) {
   const { pathname } = useLocation();
   const { cart } = useCartStore();
   const navigate = useNavigate();
+  const { query, setQuery } = useSearchStore();
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<AppResponse>(["home"]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      const searchArea = document.querySelector(".search-area");
+      const resultsArea = document.querySelector(".search-results");
+
+      if (
+        (searchArea && !searchArea.contains(event.target as Node)) ||
+        (resultsArea && !resultsArea.contains(event.target as Node))
+      ) {
+        const timeout = setTimeout(() => {
+          setQuery("");
+          clearTimeout(timeout);
+        }, 100);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, []);
 
   if (!data) return null;
 
@@ -103,7 +130,12 @@ export default function Header({ ...rest }: HeaderProps) {
             <img src={logo} alt="Logo" />
           </S.HeaderLogo>
 
-          <Search placeholder="Digite o nome do produto" />
+          <Search
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Digite o nome do produto"
+            className="search-area"
+          />
 
           <S.HeaderCartButton onClick={() => navigate("/cart")}>
             <CartIcon data-value={cart.length} />
