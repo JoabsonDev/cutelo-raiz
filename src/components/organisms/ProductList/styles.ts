@@ -6,12 +6,17 @@ export const List = styled.ul`
   margin-top: 24px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  justify-items: center;
   gap: 16px;
 `;
 export const ListItem = styled.li`
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   @media (width > ${({ theme }) => theme.BREAKPOINTS.MD}px) {
-    max-width: 350px;
+    max-width: 327.5px;
   }
 `;
 export const ListItemLink = styled(NavLink)`

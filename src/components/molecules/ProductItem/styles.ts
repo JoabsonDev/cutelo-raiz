@@ -76,6 +76,7 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   height: 100%;
+  width: 100%;
 
   a {
     margin-top: 16px;
