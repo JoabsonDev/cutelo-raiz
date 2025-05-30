@@ -7,16 +7,16 @@ export const List = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 16px;
+
+  @media (width > ${({ theme }) => theme.BREAKPOINTS.MD}px) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 327.5px));
+  }
 `;
 export const ListItem = styled.li`
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-
-  @media (width > ${({ theme }) => theme.BREAKPOINTS.MD}px) {
-    max-width: 327.5px;
   }
 `;
 export const ListItemLink = styled(NavLink)`
