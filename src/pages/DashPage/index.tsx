@@ -1,3 +1,4 @@
+import Loading from "@molecules/Loading";
 import Footer from "@organisms/Footer";
 import Header from "@organisms/Header";
 import SearchList from "@organisms/SearchList";
@@ -26,7 +27,7 @@ export default function Home() {
   if (isLoading || isFetching)
     return (
       <S.DashPageContainer>
-        <div>shimmer aqui</div>
+        <Loading />
       </S.DashPageContainer>
     );
 
