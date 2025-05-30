@@ -19,28 +19,3 @@ export const SwiperWrapper = styled(Swiper)`
     --swiper-pagination-bottom: -4px;
   }
 `;
-
-export const ButtonAction = styled.button`
-  ${({ theme }) => theme.CLEAR_BUTTON};
-
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 32px;
-  height: 32px;
-  padding: 4px;
-  border-radius: 999px;
-  background-color: ${({ theme }) => theme.COLORS.NEUTRAL[100]};
-  color: ${({ theme }) => theme.COLORS.NEUTRAL[800]};
-  cursor: pointer;
-  opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
-  pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
-
-  &.left {
-    left: 0;
-  }
-  &.right {
-    right: 0;
-  }
-`;

@@ -3,11 +3,12 @@ import styled from "styled-components";
 export const ProductContainer = styled.div`
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
   gap: 16px;
   margin-top: 24px;
 `;
 export const ProductGalery = styled.div`
-  display: grid;
+  display: none;
   grid-template-columns: auto 1fr;
   grid-template-areas:
     "miniature1 image"
@@ -21,6 +22,10 @@ export const ProductGalery = styled.div`
   gap: 8px;
   position: sticky;
   top: 240px;
+
+  @media (width >= ${({ theme }) => theme.BREAKPOINTS.MD}px) {
+    display: grid;
+  }
 `;
 export const ProductDetailButtonTrigger = styled.button`
   ${({ theme }) => theme.CLEAR_BUTTON};
@@ -54,6 +59,8 @@ export const ReactImageMagnifyWrapper = styled.div`
 `;
 
 export const ProductDetail = styled.div`
+  flex: 1 0 374px;
+
   button {
     margin-top: 16px;
   }
@@ -97,4 +104,19 @@ export const ProductDetailPriceContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
+`;
+
+export const ProductDetailMobileCarousel = styled.div`
+  position: relative;
+  display: none;
+
+  img {
+    width: 100%;
+    height: clamp(200px, 26vw, 400px);
+    object-fit: cover;
+  }
+
+  @media (width < ${({ theme }) => theme.BREAKPOINTS.MD}px) {
+    display: block;
+  }
 `;

@@ -1,11 +1,14 @@
 import Button from "@atoms/Button";
 import products from "@helpers/parse-products";
 import toCurrency from "@helpers/to-currency";
+import { SwiperWrapper } from "@organisms/FeaturedProductsCarousel/styles";
 import useCartStore from "@store/cart";
 import { useEffect, useState } from "react";
 import ReactImageMagnify from "react-image-magnify";
 import { useQueryClient } from "react-query";
 import { useLocation, useParams } from "react-router-dom";
+import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
+import { SwiperSlide } from "swiper/react";
 import * as S from "./styles";
 
 const { getAll } = products();
@@ -91,6 +94,51 @@ export default function Product() {
           />
         </S.ReactImageMagnifyWrapper>
       </S.ProductGalery>
+
+      <S.ProductDetailMobileCarousel>
+        <SwiperWrapper
+          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          spaceBetween={50}
+          slidesPerView={1}
+          navigation
+          pagination={{ clickable: true }}
+          centeredSlides={true}
+        >
+          {!!product?.image1 && (
+            <SwiperSlide>
+              <img
+                src={product?.image1}
+                alt={`Imagem do produto ${product?.name}`}
+              />
+            </SwiperSlide>
+          )}
+          {!!product?.image2 && (
+            <SwiperSlide>
+              <img
+                src={product?.image2}
+                alt={`Imagem do produto ${product?.name}`}
+              />
+            </SwiperSlide>
+          )}
+          {!!product?.image3 && (
+            <SwiperSlide>
+              <img
+                src={product?.image3}
+                alt={`Imagem do produto ${product?.name}`}
+              />
+            </SwiperSlide>
+          )}
+          {!!product?.image4 && (
+            <SwiperSlide>
+              <img
+                src={product?.image4}
+                alt={`Imagem do produto ${product?.name}`}
+              />
+            </SwiperSlide>
+          )}
+        </SwiperWrapper>
+      </S.ProductDetailMobileCarousel>
+
       <S.ProductDetail>
         <S.ProductDetailTitle>{product?.name}</S.ProductDetailTitle>
         <S.ProductDetailDescription>
