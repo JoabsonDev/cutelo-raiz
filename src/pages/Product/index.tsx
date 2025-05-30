@@ -2,10 +2,10 @@ import Button from "@atoms/Button";
 import products from "@helpers/parse-products";
 import toCurrency from "@helpers/to-currency";
 import useCartStore from "@store/cart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactImageMagnify from "react-image-magnify";
 import { useQueryClient } from "react-query";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import * as S from "./styles";
 
 const { getAll } = products();
@@ -13,6 +13,7 @@ const { getAll } = products();
 export default function Product() {
   const { id } = useParams();
   const { cart, updateCart } = useCartStore();
+  const location = useLocation();
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<AppResponse>(["home"]);
 
@@ -20,6 +21,10 @@ export default function Product() {
   const product = products.find((product) => product.id === +id!);
 
   const [activeImage, setActiveImage] = useState(product?.image1 || "");
+
+  useEffect(() => {
+    setActiveImage(product?.image1 || "");
+  }, [location.pathname]);
 
   return (
     <S.ProductContainer className="container">
