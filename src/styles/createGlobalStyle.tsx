@@ -33,29 +33,20 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
   }
 
-  .marker-label{
-    margin-bottom: 52px;
-    background-color: ${({ theme }) => theme.COLORS.RED[500]};
-    color: ${({ theme }) => theme.COLORS.WHITE} !important;
-    padding: 4px;
-    border-radius: 4px;
-    font-size: 12px !important;
-  }
-
-  div:has([src*="location-drag.png"]) > div:has(div > div > .marker-label){
-    z-index: 999999 !important;
-
-    .marker-label{
-      margin-bottom: 78px;
-      background-color: ${({ theme }) => theme.COLORS.BLACK};
-      opacity: .5
-    }
-  }
-
-
   .container{
     max-width: 1366px;
     margin: 0 auto;
+  }
+
+  @media (width < ${({ theme }) => theme.BREAKPOINTS.MD}px) {
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    body {
+      -ms-overflow-style: none; /* IE 10+ */
+      scrollbar-width: none; /* Firefox */
+    }
   }
 `;
 

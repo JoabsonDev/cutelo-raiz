@@ -86,8 +86,8 @@ export const HeaderBottom = styled.nav`
     ${({ theme }) => theme.CLEAR_LIST};
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 16px;
+    overflow-y: auto;
 
     li {
       a {
