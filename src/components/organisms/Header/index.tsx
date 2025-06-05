@@ -142,7 +142,7 @@ export default function Header({ ...rest }: HeaderProps) {
           </S.HeaderCartButton>
         </S.HeaderTop>
       </div>
-      <S.HeaderBottom>
+      <S.HeaderBottom className="container">
         {!id && pathname !== "/cart" ? (
           <ul>
             <li>
